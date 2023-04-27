@@ -1,0 +1,34 @@
+assume cs:code
+a segment
+        db 1,2,3,4,5,6,7,8
+a ends
+b segment
+        db 1,2,3,4,5,6,7,8
+b ends
+c segment
+        db 0,0,0,0,0,0,0,0
+c ends
+code segment
+start:  mov ax,ds
+        add ax,10h
+        mov ds,ax
+        mov bx,0
+        mov cx,8
+      s:mov al,[bx]
+        mov dx,ds
+        add dx,1h
+        mov ds,dx
+        add al,[bx]
+        mov dx,ds
+        add dx,1h
+        mov ds,dx
+        mov [bx],al
+        sub dx,2h
+        mov ds,dx
+        inc bx
+        loop s
+
+        mov ax,4c00h
+        int 21h
+code ends
+end start
